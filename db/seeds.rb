@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+u = User.create(name: "Joseph", email: "joseph@thescore.com", elo: 1500)
+u2 = User.create(name: "Stevens", email: "ripstevens@thescore.com", elo: 3000)
+
+Match.create(player_one: u, player_two: u2, winner: u2)
