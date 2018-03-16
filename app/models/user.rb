@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :won_matches, class_name: "Match", foreign_key: "winner_id"
 
+  scope :ranked, -> { order(elo: :desc) }
+
   def matches
     Match.where("player_one_id = ? OR player_two_id = ?", self.id, self.id)
   end

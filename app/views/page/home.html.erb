@@ -1,2 +1,45 @@
-<h1>PageController#home</h1>
-<p>Find me in app/views/page_controller/home.html.erb</p>
+<h1>Ranking</h1>
+<table>
+  <thead>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Elo</th>
+  </thead>
+  <tbody>
+  <% @users.each_with_index do |user, index| %>
+    <tr>
+      <td>#<%= index + 1 %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.elo %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</ul>
+
+<h1>Recent Matches</h1>
+<table>
+  <thead>
+    <th>Date</th>
+    <th>Player One</th>
+    <th>Player Two</th>
+  </thead>
+  <tbody>
+  <% @matches.each do |match| %>
+    <tr>
+      <td><%= match.start_date.strftime("%D - %T") %></td>
+      <td>
+        <%= win_or_lose_indicator(match.player_one_id, match.winner_id) %>
+        <%= match.player_one.name %>
+      </td>
+      <td>
+        <%= match.player_two.name %>
+        <%= win_or_lose_indicator(match.player_two_id, match.winner_id) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</ul>

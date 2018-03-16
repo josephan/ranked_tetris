@@ -93,6 +93,7 @@ GEM
     nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    normalize-rails (4.1.1)
     orm_adapter (0.5.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -214,6 +215,7 @@ DEPENDENCIES
   factory_bot
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  normalize-rails
   pry
   pry-rails
   puma (~> 3.7)
