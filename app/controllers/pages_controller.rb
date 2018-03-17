@@ -1,4 +1,4 @@
-class PageController < ApplicationController
+class PagesController < ApplicationController
   def home
     @users = User.ranked
     @matches = Match.recent
