@@ -1,0 +1,29 @@
+<h1>Matches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Player one</th>
+      <th>Player two</th>
+      <th>Start date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @matches.each do |match| %>
+      <tr>
+        <td><%= match.player_one_id %></td>
+        <td><%= match.player_two_id %></td>
+        <td><%= match.start_date %></td>
+        <td><%= link_to 'Show', match %></td>
+        <td><%= link_to 'Edit', edit_match_path(match) %></td>
+        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Match', new_match_path %>

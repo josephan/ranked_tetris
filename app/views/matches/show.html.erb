@@ -1,0 +1,17 @@
+<p>
+  <strong>Player one:</strong>
+  <%= @match.player_one_id %>
+</p>
+
+<p>
+  <strong>Player two:</strong>
+  <%= @match.player_two_id %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @match.start_date %>
+</p>
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>

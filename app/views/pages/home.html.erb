@@ -3,7 +3,6 @@
   <thead>
     <th>Rank</th>
     <th>Name</th>
-    <th>Email</th>
     <th>Elo</th>
   </thead>
   <tbody>
@@ -11,7 +10,6 @@
     <tr>
       <td>#<%= index + 1 %></td>
       <td><%= user.name %></td>
-      <td><%= user.email %></td>
       <td><%= user.elo %></td>
     </tr>
   <% end %>
@@ -19,7 +17,7 @@
 </table>
 </ul>
 
-<h2>Recent Matches</h2>
+<h2>Upcoming Matches</h2>
 <table>
   <thead>
     <th>Date</th>
@@ -29,7 +27,30 @@
   <tbody>
   <% @matches.each do |match| %>
     <tr>
-      <td><%= match.start_date.strftime("%D - %T") %></td>
+      <td><%= match.start_date.in_time_zone("EST").strftime("%D - %T") %></td>
+      <td>
+        <%= match.player_one.name %>
+      </td>
+      <td>
+        <%= match.player_two.name %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<p>(<%= link_to("all upcoming matches...", "#") %>)</p>
+
+<h2>Past Matches</h2>
+<table>
+  <thead>
+    <th>Date</th>
+    <th>Player One</th>
+    <th>Player Two</th>
+  </thead>
+  <tbody>
+  <% @matches.each do |match| %>
+    <tr>
+      <td><%= match.start_date.in_time_zone("EST").strftime("%D - %T") %></td>
       <td>
         <%= win_or_lose_indicator(match.player_one_id, match.winner_id) %>
         <%= match.player_one.name %>
@@ -42,4 +63,4 @@
   <% end %>
   </tbody>
 </table>
-<p>(<%= link_to("all matches...", "#") %>)</p>
+<p>(<%= link_to("all past matches...", "#") %>)</p>
