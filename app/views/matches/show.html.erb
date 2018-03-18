@@ -8,15 +8,16 @@
   <%= @match.player_two_id %>
 </p>
 
+<p>
+  <strong>Date:</strong>
+  <%= @match.created_at %>
+</p>
+
 <% if @match.winner_id.blank? && current_user.id == @match.player_two_id %>
   <p>Hello <%= current_user.first_name %>, please confirm the match results by clicking the button below.</p>
   <%= button_to "Confirm Match Result", { action: "confirm", confirmation_uuid: @match.confirmation_uuid, date: { confirm: "Are you sure the match result is correct?" } } %>
   <p>If the match result is incorrect either <%= @match.player_one.name %> is lying or you are lying.</p>
 <% end %>
 
-<p>
-  <strong>Date:</strong>
-  <%= @match.created_at %>
-</p>
 
 <%= link_to 'Back', matches_path %>

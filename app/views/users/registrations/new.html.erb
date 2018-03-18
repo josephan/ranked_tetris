@@ -1,39 +1,32 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :name, "Full Name" %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= label_tag :registration_code %><br />
-    <%= text_field_tag :registration_code %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+<div class="center-elements">
+  <h4>Sign up</h4>
+  
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form") do |f| %>
+    <%= devise_error_messages! %>
+  
+    <%= f.label :name, "Full Name" %>
+    <%= f.text_field :name, autofocus: true, class: "u-full-width" %>
+  
+    <%= f.label :email %>
+    <%= f.email_field :email, autocomplete: "email", class: "u-full-width" %>
+  
+    <%= f.label :password do %>
+      <% if @minimum_password_length %>
+        Password <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "off", class: "u-full-width" %>
+  
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "u-full-width" %>
+  
+    <%= label_tag :registration_code %>
+    <%= text_field_tag :registration_code, nil, class: "u-full-width" %>
+  
+    <div class="center-elements">
+      <%= f.submit "Sign up" %>
+    </div>
+  <% end %>
+  
+  <%= render "users/shared/links" %>
+</div>

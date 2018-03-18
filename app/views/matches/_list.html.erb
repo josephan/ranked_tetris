@@ -1,10 +1,10 @@
 <% if matches.present? %>
-  <table>
+  <table class="u-full-width">
     <thead>
       <tr>
-        <th>Player one</th>
-        <th>Player two</th>
-        <th>Start date</th>
+        <th>🏆 Winner</th>
+        <th>☠️ Loser</th>
+        <th>Date</th>
         <th></th>
       </tr>
     </thead>
@@ -12,9 +12,13 @@
     <tbody>
       <% matches.each do |match| %>
         <tr>
-          <td><%= match.player_one_id %></td>
-          <td><%= match.player_two_id %></td>
-          <td><%= match.created_at %></td>
+          <td>
+            <%= match.player_one.name %>
+          </td>
+          <td>
+            <%= match.player_two.name %>
+          </td>
+          <td><%= match.date %></td>
           <td>(<%= link_to("Show", match_path(match)) %>)</td>
         </tr>
       <% end %>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RankedTetris</title>
+    <title>Ranked Tetris</title>
     <%= csrf_meta_tags %>
 
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
@@ -10,27 +10,31 @@
   </head>
 
   <body>
-    <div class="header">
-      <h1>
-        <%= link_to("Tetris", root_path, class: "logo") %>
-      </h1>
+    <div class="center-elements header">
+      <h2 class="logo">
+        <%= link_to("Ranked Tetris", root_path) %>
+      </h2>
       <div class="header-link">
         <% if current_user %>
-          <%= link_to("Record Match Result", new_match_path) %>
-          <%= link_to("Logout", destroy_user_session_path, method: :delete) %>
+          <%= link_to("Record Match Result", new_match_path, class: "button button-primary") %>
+          <%= link_to("Logout", destroy_user_session_path, method: :delete, class: "button") %>
         <% else %>
-          <%= link_to("Sign Up", new_user_registration_path) %>
-          <%= link_to("Login", new_user_session_path) %>
+          <%= link_to("Sign Up", new_user_registration_path, class: "button small-button") %>
+          <%= link_to("Login", new_user_session_path, class: "button-primary") %>
         <% end %>
       </div>
     </div>
 
-    <div class="flash-messages">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
-
     <div class="container">
+      <div class="center-elements alerts">
+        <% if notice %>
+          <p class="notice"><%= notice %> ✅</p>
+        <% end %>
+        <% if alert %>
+          <p class="alert"><%= alert %> ❌</p>
+        <% end %>
+      </div>
+
       <%= yield %>
     </div>
   </body>

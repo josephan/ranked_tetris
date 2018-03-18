@@ -3,8 +3,8 @@ body {
   padding-top: 1em;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0.1em 0;
+th, td {
+  padding: 6px 0;
 }
 
 a {
@@ -15,27 +15,42 @@ a {
   }
 }
 
+.center-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inline-elements {
+  display: flex;
+}
+
 .header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-bottom: 40px;
+
+  .logo {
+    margin: 10px;
+  }
 }
 
-.header-links {
-
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.flash-messages {
-  display: flex;
+.alerts {
   justify-content: center;
+
+  p {
+    margin: 10px 0;
+    font-size: 18px;
+  }
 }
 
-.field {
-  margin: 1.5em 0;
+form {
+  min-width: 300px;
 }
+
+.small-button {
+  padding: 0 15px;
+}
+
+.mt-20 { margin-top:    20px; }
+.mr-20 { margin-right:  20px; }
+.mb-20 { margin-bottom: 20px; }
+.ml-20 { margin-left:   20px; }

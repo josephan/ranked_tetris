@@ -1,34 +1,38 @@
-<h1>Record Match Result</h1>
-
-<%= form_with(model: @match, local: true) do |form| %>
-  <% if @match.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
-
-      <ul>
-      <% @match.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="center-elements">
+  <h4>Record Match Result</h4>
+  
+  <%= form_with(model: @match, local: true) do |form| %>
+    <% if @match.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+  
+        <ul>
+          <% @match.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <%= form.label :player_one_won, "Did you win the match, #{current_user.first_name}?" %>
+    <div class="inline-elements">
+      <%= form.label :player_one_won, value: true, checked: true, class: "mr-20", for: "yesPlayerOneWon" do %>
+        <%= form.radio_button :player_one_won, true, id: "yesPlayerOneWon" %>
+        <span class="label-body">Yes</span>
       <% end %>
-      </ul>
+      <%= form.label :player_one_won, value: false, for: "noPlayerOneWon" do %>
+        <%= form.radio_button :player_one_won, false, id: "noPlayerOneWon" %>
+        <span class="label-body">No</span>
+      <% end %>
+    </div>
+  
+      <%= form.label :player_two_id, "Who was your oppoent?" %>
+      <%= form.select :player_two_id, User.everyone_else(current_user).collect { |u| ["#{u.name} - #{u.email}", u.id] }, {prompt: "Select Opponent"}, required: true %>
+  
+    <div class="center-elements">
+      <%= form.submit "Save Match Result" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :player_one_won, "Did you win #{current_user.first_name}?" %><br />
-    <%= form.label :player_one_won, "Yes", :value => true, checked: true %>
-    <%= form.radio_button :player_one_won, true %>
-    <%= form.label :player_one_won, "No", :value => false %>
-    <%= form.radio_button :player_one_won, false %>
-  </div>
-
-  <div class="field">
-    <%= form.label :player_two_id, "Who was your oppoent?" %><br />
-    <%= form.select :player_two_id, User.everyone_else(current_user).collect { |u| ["#{u.name} - #{u.email}", u.id] }, {prompt: "Select Opponent"}, required: true %>
-  </div>
-
-  <div class="field">
-    <%= form.submit "Save Match Result" %>
-  </div>
-<% end %>
-
-<%= link_to 'Cancel', root_path %>
+  
+  <%= link_to 'Cancel', root_path %>
+</div>

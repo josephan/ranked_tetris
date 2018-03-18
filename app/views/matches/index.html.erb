@@ -1,9 +1,11 @@
-<h1>Completed Matches</h1>
-<%= render "list", matches: @confirmed_matches %>
+<div class="row">
+  <div class="six columns">
+    <h4>Unconfirmed Matches</h4>
+    <%= render "list", matches: @unconfirmed_matches %>
+  </div>
 
-<h1>Unconfirmed Matches</h1>
-<%= render "list", matches: @unconfirmed_matches %>
-
-<br>
-
-<%= link_to 'New Match', new_match_path %>
+  <div class="six columns">
+    <h4>Completed Matches</h4>
+    <%= render "list", matches: @confirmed_matches %>
+  </div>
+</div>
