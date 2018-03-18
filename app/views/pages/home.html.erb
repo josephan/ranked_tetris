@@ -18,26 +18,7 @@
 </ul>
 
 <h2>Past Matches</h2>
-<table>
-  <thead>
-    <th>Date</th>
-    <th>Player One</th>
-    <th>Player Two</th>
-  </thead>
-  <tbody>
-  <% @matches.each do |match| %>
-    <tr>
-      <td><%= match.created_at.in_time_zone("EST").strftime("%D - %T") %></td>
-      <td>
-        <%= win_or_lose_indicator(match.player_one_id, match.winner_id) %>
-        <%= match.player_one.name %>
-      </td>
-      <td>
-        <%= match.player_two.name %>
-        <%= win_or_lose_indicator(match.player_two_id, match.winner_id) %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+
+<%= render "matches/list", matches: @matches %>
+
 <p>(<%= link_to("all past matches...", matches_path) %>)</p>

@@ -35,6 +35,7 @@ class MatchesController < ApplicationController
       player_one_elo_delta: player_one_elo_delta,
       player_two_elo_delta: player_two_elo_delta
     }
+    require 'pry'; binding.pry
     @match = Match.new(match_params.merge(extra_params))
 
     if @match.save

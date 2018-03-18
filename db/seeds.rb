@@ -11,6 +11,7 @@ User.destroy_all
 
 u2 = User.create(name: "Stevens", email: "rip_stevens@thescore.com", elo: 10000, password: "123123")
 u = User.create(name: "Joseph", email: "joseph@thescore.com", elo: 9000, password: "123123")
+u = User.create(name: "Test", email: "test@test.com", elo: 9000, password: "123123")
 User.create(name: "McKay", email: "mckay@thescore.com", elo: 8000, password: "123123")
 User.create(name: "David", email: "david@thescore.com", elo: 7000, password: "123123")
 User.create(name: "Aaron", email: "aaron@thescore.com", elo: 6000, password: "123123")

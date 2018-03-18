@@ -12,22 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20180316224231) do
 
-  create_table "matches", force: :cascade do |t|
-    t.integer "player_one_id"
-    t.integer "player_two_id"
-    t.integer "winner_id"
-    t.integer "player_one_elo_delta"
-    t.integer "player_two_elo_delta"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["player_one_id"], name: "index_matches_on_player_one_id"
-    t.index ["player_two_id"], name: "index_matches_on_player_two_id"
-    t.index ["winner_id"], name: "index_matches_on_winner_id"
-  end
+# Could not dump table "matches" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.integer "elo", default: 2000, null: false
+    t.boolean "retired", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
