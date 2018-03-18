@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   scope :ranked, -> { order(elo: :desc) }
+  scope :everyone_else, ->(current_user) { where.not(id: current_user.id) }
 
   def matches
     Match.where("player_one_id = ? OR player_two_id = ?", self.id, self.id)
@@ -21,6 +22,10 @@ class User < ApplicationRecord
 
   def losses
     self.matches.count - self.wins
+  end
+
+  def first_name
+    name.split(" ").first.capitalize
   end
 
   private

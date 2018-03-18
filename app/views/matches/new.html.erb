@@ -1,5 +1,34 @@
-<h1>New Match</h1>
+<h1>Record Match Result</h1>
 
-<%= render 'form', match: @match %>
+<%= form_with(model: @match, local: true) do |form| %>
+  <% if @match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
 
-<%= link_to 'Back', matches_path %>
+      <ul>
+      <% @match.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :player_one_won, "Did you win #{current_user.first_name}?" %><br />
+    <%= form.label :player_one_won, "Yes", :value => true, checked: true %>
+    <%= form.radio_button :player_one_won, true %>
+    <%= form.label :player_one_won, "No", :value => false %>
+    <%= form.radio_button :player_one_won, false %>
+  </div>
+
+  <div class="field">
+    <%= form.label :player_two_id, "Who was your oppoent?" %><br />
+    <%= form.select :player_two_id, User.everyone_else(current_user).collect { |u| ["#{u.name} - #{u.email}", u.id] }, {prompt: "Select Opponent"} %>
+  </div>
+
+  <div class="field">
+    <%= form.submit "Save Match Result" %>
+  </div>
+<% end %>
+
+<%= link_to 'Cancel', root_path %>

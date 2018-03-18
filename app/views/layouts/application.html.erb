@@ -4,16 +4,19 @@
     <title>RankedTetris</title>
     <%= csrf_meta_tags %>
 
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <div class="header">
-      <h1>Tetris</h1>
+      <h1>
+        <%= link_to("Tetris", root_path, class: "logo") %>
+      </h1>
       <div class="header-link">
         <% if current_user %>
-          <%= link_to("New Match", "#") %>
+          <%= link_to("Record Match Result", new_match_path) %>
           <%= link_to("Logout", destroy_user_session_path, method: :delete) %>
         <% else %>
           <%= link_to("Sign Up", new_user_registration_path) %>

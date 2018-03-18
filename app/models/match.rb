@@ -3,8 +3,9 @@ class Match < ApplicationRecord
   belongs_to :player_two, class_name: "User"
   belongs_to :winner, class_name: "User"
 
-  scope :recent, -> { order(start_date: :desc).limit(10) }
-  scope :completed, -> { where.not(winner_id: nil) }
-  scope :not_yet_started, -> { where(winner_id: nil) }
-  scope :upcoming, -> { where("start_date >= ?", Time.zone.now) }
+  scope :confirmed, -> { where.not(winner_id: nil) }
+  scope :confirmed, -> { where(winner_id: nil) }
+  scope :recent, -> { order(created_at: :desc).limit(10) }
+
+  validates_presence_of :player_one_id, :player_two_id, :player_one_won, :player_one_elo_delta, :player_two_elo_delta
 end

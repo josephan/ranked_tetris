@@ -9,15 +9,13 @@
 Match.destroy_all
 User.destroy_all
 
-u2 = User.create(name: "Stevens (RIP)", email: "stevens@thescore.com", elo: 10000, password: "123123")
+u2 = User.create(name: "Stevens", email: "rip_stevens@thescore.com", elo: 10000, password: "123123")
 u = User.create(name: "Joseph", email: "joseph@thescore.com", elo: 9000, password: "123123")
 User.create(name: "McKay", email: "mckay@thescore.com", elo: 8000, password: "123123")
-User.create(name: "Thorney", email: "thorney@thescore.com", elo: 7000, password: "123123")
-User.create(name: "Gough", email: "gough@thescore.com", elo: 6000, password: "123123")
+User.create(name: "David", email: "david@thescore.com", elo: 7000, password: "123123")
+User.create(name: "Aaron", email: "aaron@thescore.com", elo: 6000, password: "123123")
 User.create(name: "Sacha", email: "sacha@thescore.com", elo: 5000, password: "123123")
 User.create(name: "Kuba", email: "kuba@thescore.com", elo: 4000, password: "123123")
-
-Match.create(player_one: u, player_two: u2, winner: u2, start_date: DateTime.yesterday)
 
 puts "#{User.count} users created!"
 puts "#{Match.count} matches created!"
