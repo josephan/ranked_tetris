@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   resources "matches", only: [:index, :new, :create, :show]
 
+  post "/matches/:id/confirm", to: "matches#confirm"
+
   root to: "pages#home"
 end

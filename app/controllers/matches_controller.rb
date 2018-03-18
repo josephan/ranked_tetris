@@ -1,6 +1,6 @@
 class MatchesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_match, only: [:show]
+  before_action :set_match, only: [:show, :confirm]
 
   def index
     @confirmed_matches = Match.confirmed
@@ -39,9 +39,23 @@ class MatchesController < ApplicationController
     @match = Match.new(match_params.merge(extra_params))
 
     if @match.save
-      redirect_to @match, notice: "An email has been sent to your opponent for confirmation. Or you can send that person this link #{"https://www.ranked.fun/matches/#{@match.id}"}"
+      redirect_to @match, notice: "An email has been sent to your opponent for confirmation. Or you can send your opponent this link #{"https://www.ranked.fun/matches/#{@match.id}"}"
     else
       render :new
+    end
+  end
+
+  def confirm
+    correct_confirmation_code = @match.confirmation_uuid == params[:confirmation_uuid]
+    correct_user = @match.player_two_id == current_user.id
+    if correct_confirmation_code && correct_user
+      winner_id = @match.player_one_won? ? @match.player_one_id : @match.player_two_id
+      @match.update(winner_id: winner_id)
+      @match.player_one.update(elo: @match.player_one.elo + @match.player_one_elo_delta)
+      @match.player_two.update(elo: @match.player_two.elo + @match.player_two_elo_delta)
+      redirect_to @match, notice: "Thank you for confirming the match. Your elos have been updated!"
+    else
+      redirect_to @match, notice: "Sorry you do not have the permission to confirm this match."
     end
   end
 

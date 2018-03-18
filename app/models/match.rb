@@ -10,7 +10,13 @@ class Match < ApplicationRecord
   validates_presence_of :player_one_id, :player_two_id, :player_one_won, :player_one_elo_delta, :player_two_elo_delta
   validate :player_one_and_player_two_is_different
 
+  before_create :generate_confirmation_uuid
+
   private
+
+  def generate_confirmation_uuid
+    self.confirmation_uuid = SecureRandom.uuid
+  end
 
   def player_one_and_player_two_is_different
     errors.add(:player_two_id, "cannot be the same as player one") if player_one_id == player_two_id

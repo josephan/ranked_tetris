@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20180316224231) do
     t.boolean "player_one_won", default: true, null: false
     t.integer "player_one_elo_delta"
     t.integer "player_two_elo_delta"
+    t.string "confirmation_uuid", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_one_id"], name: "index_matches_on_player_one_id"

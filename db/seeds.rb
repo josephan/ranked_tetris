@@ -18,5 +18,9 @@ User.create(name: "Aaron", email: "aaron@thescore.com", elo: 6000, password: "12
 User.create(name: "Sacha", email: "sacha@thescore.com", elo: 5000, password: "123123")
 User.create(name: "Kuba", email: "kuba@thescore.com", elo: 4000, password: "123123")
 
+# confirmed match
+
+# unconfirmed match
+
 puts "#{User.count} users created!"
 puts "#{Match.count} matches created!"
