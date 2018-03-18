@@ -4,6 +4,7 @@ class MatchesController < ApplicationController
 
   def index
     @confirmed_matches = Match.confirmed
+    @unconfirmed_matches = Match.unconfirmed
   end
 
   def new
@@ -35,11 +36,10 @@ class MatchesController < ApplicationController
       player_one_elo_delta: player_one_elo_delta,
       player_two_elo_delta: player_two_elo_delta
     }
-    require 'pry'; binding.pry
     @match = Match.new(match_params.merge(extra_params))
 
     if @match.save
-      redirect_to @match, notice: "Match result created. An email has been sent to your opponent for confirmation. Or you can send him this link #{"https://www.ranked.fun/matches/#{match_id}"}"
+      redirect_to @match, notice: "An email has been sent to your opponent for confirmation. Or you can send that person this link #{"https://www.ranked.fun/matches/#{@match.id}"}"
     else
       render :new
     end
@@ -50,7 +50,6 @@ class MatchesController < ApplicationController
   def set_match
     @match = Match.find(params[:id])
   end
-
 
   def match_params
     params.require(:match).permit(:player_one_won, :player_two_id)

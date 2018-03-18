@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :player_two_id, "Who was your oppoent?" %><br />
-    <%= form.select :player_two_id, User.everyone_else(current_user).collect { |u| ["#{u.name} - #{u.email}", u.id] }, {prompt: "Select Opponent"} %>
+    <%= form.select :player_two_id, User.everyone_else(current_user).collect { |u| ["#{u.name} - #{u.email}", u.id] }, {prompt: "Select Opponent"}, required: true %>
   </div>
 
   <div class="field">

@@ -1,6 +1,8 @@
-<h1>Matches</h1>
+<h1>Completed Matches</h1>
+<%= render "list", matches: @confirmed_matches %>
 
-<%= render "list", matches: @matches %>
+<h1>Unconfirmed Matches</h1>
+<%= render "list", matches: @unconfirmed_matches %>
 
 <br>
 
