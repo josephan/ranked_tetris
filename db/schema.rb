@@ -12,8 +12,23 @@
 
 ActiveRecord::Schema.define(version: 20180316224231) do
 
-# Could not dump table "matches" because of following StandardError
-#   Unknown type 'uuid' for column 'id'
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "pgcrypto"
+
+  create_table "matches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "player_one_id"
+    t.bigint "player_two_id"
+    t.bigint "winner_id"
+    t.boolean "player_one_won", default: true, null: false
+    t.integer "player_one_elo_delta"
+    t.integer "player_two_elo_delta"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_one_id"], name: "index_matches_on_player_one_id"
+    t.index ["player_two_id"], name: "index_matches_on_player_two_id"
+    t.index ["winner_id"], name: "index_matches_on_winner_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -35,4 +50,6 @@ ActiveRecord::Schema.define(version: 20180316224231) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "matches", "users", column: "player_one_id"
+  add_foreign_key "matches", "users", column: "player_two_id"
 end
