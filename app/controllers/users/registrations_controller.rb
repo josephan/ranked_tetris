@@ -10,9 +10,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    registration_code = ENV["REGISTRATION_CODE"] || "tetris4life"
+    if params["registration_code"] == registration_code
+      super
+    else
+      redirect_to root_url, notice: "Sorry the registration code you provided is incorrect."
+    end
+  end
 
   # GET /resource/edit
   # def edit
