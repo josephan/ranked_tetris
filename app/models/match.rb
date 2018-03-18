@@ -13,18 +13,50 @@ class Match < ApplicationRecord
 
   before_create :generate_confirmation_uuid
 
+  def confirmed?
+    winner_id.present?
+  end
+
   def date
     created_at.strftime("%b %e, %Y %l:%M%P")
   end
 
-  def loser
-    if winner_id && winner_id == player_one_id
-      player_two
-    elsif winner_id && winner_id == player_two_id
-      player_one
+  def winner
+    if winner_id
+      super
     else
       player_one_won? ? player_one : player_two
     end
+  end
+
+  def loser
+    winner.id == player_one_id ? player_two : player_one
+  end
+
+  def winner_delta
+    player_delta = if player_one_is_winner?
+                     player_one_elo_delta
+                   else
+                     player_two_elo_delta
+                   end
+    "+#{player_delta}"
+  end
+
+  def loser_delta
+    player_delta = if player_one_is_winner?
+                     player_two_elo_delta
+                   else
+                     player_one_elo_delta
+                   end
+    "#{player_delta}"
+  end
+
+  def player_one_is_winner?
+    winner.id == player_one.id
+  end
+
+  def url
+    "https://www.ranked.fun/match/#{id}"
   end
 
   private

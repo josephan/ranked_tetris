@@ -1,23 +1,43 @@
-<p>
-  <strong>Player one:</strong>
-  <%= @match.player_one_id %>
-</p>
+<div class="centered-content text-center">
+  <h4><%= @match.winner.name %> has beaten <%= @match.loser.name %></h4>
+  <% if !@match.confirmed? %>
+    <div class="alerts">
+      <p class="alert">
+      This match has not been confirmed.<br>
+      Please tell <%= @match.player_two.name %> to visit this link and click the confirm button.<br>
+      Only <%= @match.player_two.first_name %> will be able to see that button.<br>
+      <%= @match.url %>
+      </p>
+    </div>
+  <% end %>
 
-<p>
-  <strong>Player two:</strong>
-  <%= @match.player_two_id %>
-</p>
+  <div class="row">
+    <div class="six columns">
+      <h5>Winner</h5>
+      <ul>
+        <li>Name: <%= @match.winner.name %></li>
+        <li>Elo gained: <span class="green-text"><%= @match.winner_delta %></span></li>
+      </ul>
+    </div>
 
-<p>
-  <strong>Date:</strong>
-  <%= @match.created_at %>
-</p>
-
-<% if @match.winner_id.blank? && current_user.id == @match.player_two_id %>
-  <p>Hello <%= current_user.first_name %>, please confirm the match results by clicking the button below.</p>
-  <%= button_to "Confirm Match Result", { action: "confirm", confirmation_uuid: @match.confirmation_uuid, date: { confirm: "Are you sure the match result is correct?" } } %>
-  <p>If the match result is incorrect either <%= @match.player_one.name %> is lying or you are lying.</p>
-<% end %>
+    <div class="six columns">
+      <h5>Loser</h5>
+      <ul>
+        <li>Name: <%= @match.loser.name %></li>
+        <li>Elo lost: <span class="red-text"><%= @match.loser_delta %></span></li>
+      </ul>
+    </div>
+  </div>
 
 
-<%= link_to 'Back', matches_path %>
+  <% if @match.winner_id.blank? && current_user.id == @match.player_two_id %>
+    <p>Hello <%= current_user.first_name %>, please confirm the match results by clicking the button below.</p>
+    <div class="center-elements">
+      <%= button_to "Confirm Match Result", { action: "confirm", confirmation_uuid: @match.confirmation_uuid, date: { confirm: "Are you sure the match result is correct?" } } %>
+    </div>
+    <p>If there is an issue with the result please contact the system administrator.</p>
+  <% end %>
+
+
+  <%= link_to 'Back', matches_path %>
+</div>

@@ -4,7 +4,7 @@
       <tr>
         <th>🏆 Winner</th>
         <th>☠️ Loser</th>
-        <th>Date</th>
+        <th>Date Played</th>
         <th></th>
       </tr>
     </thead>
@@ -13,13 +13,21 @@
       <% matches.each do |match| %>
         <tr>
           <td>
-            <%= match.player_one.name %>
+            <%= match.winner.name %>
+            <% if extra_info_type %>
+              <%= extra_info(is_winner: true, match: match, type: extra_info_type) %>
+            <% end %>
           </td>
           <td>
-            <%= match.player_two.name %>
+            <%= match.loser.name %>
+            <%= extra_info(is_winner: false, match: match, type: extra_info_type) %>
           </td>
           <td><%= match.date %></td>
-          <td>(<%= link_to("Show", match_path(match)) %>)</td>
+          <td>
+            <% if user_signed_in? %>
+              (<%= link_to("Show", match_path(match)) %>)
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

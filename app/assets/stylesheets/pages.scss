@@ -26,7 +26,6 @@ a {
 }
 
 .header {
-  margin-bottom: 40px;
 
   .logo {
     margin: 10px;
@@ -38,12 +37,29 @@ a {
 
   p {
     margin: 10px 0;
-    font-size: 18px;
+    font-size: 13px;
+    border-radius: 5px;
+    padding: 10px 25px;
+    text-align: center;
+  }
+
+  .notice {
+    border: 2px solid #00c906;
+  }
+
+  .alert {
+    border: 2px solid #f50400;
   }
 }
 
+.text-center { text-align: center; }
+
+.green-text { color: #00c906 }
+.red-text { color: #f50400 }
+
 form {
   min-width: 300px;
+  max-width: 300px;
 }
 
 .small-button {
@@ -54,3 +70,4 @@ form {
 .mr-20 { margin-right:  20px; }
 .mb-20 { margin-bottom: 20px; }
 .ml-20 { margin-left:   20px; }
+.m-0 { margin: 0; }

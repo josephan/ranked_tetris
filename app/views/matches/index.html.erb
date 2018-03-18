@@ -1,11 +1,13 @@
 <div class="row">
   <div class="six columns">
-    <h4>Unconfirmed Matches</h4>
-    <%= render "list", matches: @unconfirmed_matches %>
+    <h4 class="m-0">Unconfirmed Matches</h4>
+    <p>User marked with ❌ needs to confirm the match.</p>
+    <%= render "list", matches: @unconfirmed_matches, extra_info_type: :unconfirmed %>
   </div>
 
   <div class="six columns">
-    <h4>Completed Matches</h4>
-    <%= render "list", matches: @confirmed_matches %>
+    <h4 class="m-0">Completed Matches</h4>
+    <p>Matches that have been confirmed and elo applied.</p>
+    <%= render "list", matches: @confirmed_matches, extra_info_type: :elo_delta %>
   </div>
 </div>

@@ -1,39 +1,44 @@
 <div class="row">
   <div class="six columns">
     <h2>Ranking</h2>
-    <table class="u-full-width">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Elo</th>
-          <th>W</th>
-          <th>L</th>
-          <th>Ratio</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each_with_index do |user, index| %>
+    <% if @users.present? %>
+      <table class="u-full-width">
+        <thead>
           <tr>
-            <td><%= index + 1 %>.</td>
-            <td><%= user.name %></td>
-            <td><%= user.elo %></td>
-            <td><%= user.wins %></td>
-            <td><%= user.losses %></td>
-            <td><%= user.win_ratio %></td>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Elo</th>
+            <th>W</th>
+            <th>L</th>
+            <th>Ratio</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-    </ul>
+        </thead>
+        <tbody>
+          <% @users.each_with_index do |user, index| %>
+            <tr>
+              <td><%= index + 1 %>.</td>
+              <td><%= user.name %></td>
+              <td><%= user.elo %></td>
+              <td><%= user.wins %></td>
+              <td><%= user.losses %></td>
+              <td><%= user.win_ratio %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No players in the database.</p>
+    <% end %>
   </div>
 
   <div class="six columns">
     <h2>Past Matches</h2>
 
-    <%= render "matches/list", matches: @matches %>
+    <%= render "matches/list", matches: @matches, extra_info_type: :elo_delta %>
 
-    <p>(<%= link_to("view all matches...", matches_path) %>)</p>
+    <% if user_signed_in? %>
+      <p>(<%= link_to("view all matches...", matches_path) %>)</p>
+    <% end %>
   </div>
 </div>
 

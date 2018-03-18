@@ -39,7 +39,7 @@ class MatchesController < ApplicationController
     @match = Match.new(match_params.merge(extra_params))
 
     if @match.save
-      redirect_to @match, notice: "An email has been sent to your opponent for confirmation. Or you can send your opponent this link #{"https://www.ranked.fun/matches/#{@match.id}"}"
+      redirect_to @match, notice: "Result successfully recorded. Your opponents needs to confirm the results here: #{@match.url}"
     else
       render :new
     end

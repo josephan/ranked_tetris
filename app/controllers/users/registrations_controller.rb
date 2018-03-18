@@ -11,11 +11,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    registration_code = ENV["REGISTRATION_CODE"] || "tetris4life"
-    if params["registration_code"] == registration_code
+    if params["registration_code"] == ENV.fetch("REGISTRATION_CODE", "tetris4life")
       super
     else
-      redirect_to root_url, notice: "Sorry the registration code you provided is incorrect."
+      redirect_back fallback_location: root_url, alert: "Sorry the registration code you provided is incorrect."
     end
   end
 
