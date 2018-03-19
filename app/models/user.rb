@@ -30,7 +30,7 @@ class User < ApplicationRecord
 
   def win_ratio
     if @complete_matches > 0
-      "#{(@wins / @complete_matches * 100).round}%"
+      "#{(@wins.to_f / @complete_matches * 100).round}%"
     else
       "-"
     end
