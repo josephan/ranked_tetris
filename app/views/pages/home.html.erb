@@ -1,6 +1,6 @@
 <div class="row">
   <div class="six columns">
-    <h2>Ranking</h2>
+    <h4>Ranking</h4>
     <% if @users.present? %>
       <table class="u-full-width">
         <thead>
@@ -32,7 +32,7 @@
   </div>
 
   <div class="six columns">
-    <h2>Past Matches</h2>
+    <h4>Past Matches</h4>
 
     <%= render "matches/list", matches: @matches, extra_info_type: :elo_delta %>
 
