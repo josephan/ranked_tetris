@@ -1,0 +1,12 @@
+{
+  "name": "ranked_fun",
+  "description": "Tetris ranking",
+  "keywords": [
+    "TETRIS"
+  ],
+  "scripts": {
+    "dokku": {
+      "postdeploy": "bundle exec rake db:migrate"
+    }
+  }
+}
