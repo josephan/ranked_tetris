@@ -56,7 +56,7 @@ class Match < ApplicationRecord
   end
 
   def url
-    "https://www.ranked.fun/match/#{id}"
+    "https://www.ranked.fun/matches/#{id}"
   end
 
   private
