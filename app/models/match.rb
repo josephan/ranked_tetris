@@ -73,7 +73,7 @@ class Match < ApplicationRecord
   end
 
   def loser_rounds_won
-    player_one_is_winner? ? player_one_rounds_won : player_two_rounds_won
+    player_one_is_winner? ? player_two_rounds_won : player_one_rounds_won
   end
 
   private
