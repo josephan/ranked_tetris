@@ -1,6 +1,6 @@
 class MatchesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_match, only: [:show, :confirm]
+  before_action :set_match, only: [:show, :confirm, :destroy]
 
   def index
     @confirmed_matches = Match.confirmed
@@ -56,6 +56,15 @@ class MatchesController < ApplicationController
       redirect_to @match, notice: "Thank you for confirming the match. Your elos have been updated!"
     else
       redirect_to @match, notice: "Sorry you do not have the permission to confirm this match."
+    end
+  end
+
+  def destroy
+    if @match.player_one_id == current_user.id && !@match.confirmed?
+      @match.destroy
+      redirect_to matches_url, notice: "Match successfully deleted."
+    else
+      redirect_to @match, alert: "You do not have the permissions to delete this match."
     end
   end
 

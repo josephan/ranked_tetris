@@ -39,20 +39,12 @@ class Match < ApplicationRecord
   end
 
   def winner_delta
-    player_delta = if player_one_is_winner?
-                     player_one_elo_delta
-                   else
-                     player_two_elo_delta
-                   end
+    player_delta = player_one_is_winner? ? player_one_elo_delta : player_two_elo_delta
     "+#{player_delta}"
   end
 
   def loser_delta
-    player_delta = if player_one_is_winner?
-                     player_two_elo_delta
-                   else
-                     player_one_elo_delta
-                   end
+    player_delta = player_one_is_winner? ? player_two_elo_delta : player_one_elo_delta
     "#{player_delta}"
   end
 

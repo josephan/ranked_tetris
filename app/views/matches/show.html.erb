@@ -31,9 +31,15 @@
   <% if @match.winner_id.blank? && current_user.id == @match.player_two_id %>
     <p>Hello <%= current_user.first_name %>, please confirm the match results by clicking the button below.</p>
     <div class="center-elements">
-      <%= button_to "Confirm Match Result", { action: "confirm", confirmation_uuid: @match.confirmation_uuid, date: { confirm: "Are you sure the match result is correct?" } } %>
+      <%= button_to "Confirm Match Result", { action: "confirm", confirmation_uuid: @match.confirmation_uuid } %>
     </div>
     <p>If there is an issue with the result please contact the system administrator.</p>
+  <% end %>
+
+  <% if @match.player_one_id == current_user.id && !@match.confirmed? %>
+    <div class="center-elements">
+      <%= button_to "Delete Match", { action: "destroy" }, method: :delete, data: { confirm: "Are you sure you want to delete this match?" } %>
+    </div>
   <% end %>
 
 
