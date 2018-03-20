@@ -30,10 +30,10 @@
     <%= form.select :player_two_id, User.everyone_else(current_user).collect { |u| ["#{u.name} - #{u.email}", u.id] }, {include_blank: "Select Opponent"}, required: true %>
   
     <%= form.label :player_one_rounds_won, "How many rounds did you win?" %>
-    <%= form.select :player_one_rounds_won, [1,2,3], { include_blank: "rounds won" }, required: true %>
+    <%= form.select :player_one_rounds_won, [0,1,2,3], { include_blank: "rounds won" }, required: true %>
 
     <%= form.label :player_two_rounds_won, "How many rounds did your opponent win?" %>
-    <%= form.select :player_two_rounds_won, [1,2,3], { include_blank: "rounds lost" }, required: true %>
+    <%= form.select :player_two_rounds_won, [0,1,2,3], { include_blank: "rounds lost" }, required: true %>
 
     <div class="center-elements">
       <%= form.submit "Save Match Result" %>
