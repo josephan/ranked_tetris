@@ -21,6 +21,25 @@ a {
   align-items: center;
 }
 
+.header-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 16px;
+
+  a {
+    margin: 0 3px;
+  }
+}
+
+@media (min-width: 550px) {
+  .header-links {
+    padding-left: 0;
+  }
+}
+
+
+
 .inline-elements {
   display: flex;
 }

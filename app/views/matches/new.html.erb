@@ -1,7 +1,7 @@
 <div class="center-elements">
   <h4>Record Match Result</h4>
   
-  <%= form_with(model: @match, local: true, class: "match-form") do |form| %>
+  <%= form_with(model: @match, local: true, html: { class: "match-form" }) do |form| %>
     <% if @match.errors.any? %>
       <div id="error_explanation">
         <p class="red-text"><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</p>
