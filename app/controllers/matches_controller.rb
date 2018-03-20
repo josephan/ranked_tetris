@@ -19,7 +19,7 @@ class MatchesController < ApplicationController
     player_two = User.find(match_params[:player_two_id])
 
     match = EloRating::Match.new
-    if match_params[:player_one_won]
+    if match_params[:player_one_won] == "true"
       match.add_player(rating: player_one.elo, winner: true)
       match.add_player(rating: player_two.elo)
     else

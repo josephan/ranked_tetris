@@ -36,7 +36,7 @@ module MatchesHelper
   def extra_table_td(type, value)
     case type
     when :elo_delta
-      content_tag(:th, value)
+      content_tag(:td, value)
     else
       nil
     end
