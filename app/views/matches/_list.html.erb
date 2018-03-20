@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th>🏆 Winner</th>
+        <%= extra_table_th(extra_info_type, "Result") %>
         <th>☠️ Loser</th>
         <th>Date Played</th>
         <th></th>
@@ -18,6 +19,7 @@
               <%= extra_info(is_winner: true, match: match, type: extra_info_type) %>
             <% end %>
           </td>
+          <%= extra_table_td(extra_info_type, match.result) %>
           <td>
             <%= match.loser.name %>
             <%= extra_info(is_winner: false, match: match, type: extra_info_type) %>

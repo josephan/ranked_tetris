@@ -23,4 +23,22 @@ module MatchesHelper
     return if !is_winner && !match.player_one_is_winner?
     "❌"
   end
+
+  def extra_table_th(type, value)
+    case type
+    when :elo_delta
+      content_tag(:th, value)
+    else
+      nil
+    end
+  end
+
+  def extra_table_td(type, value)
+    case type
+    when :elo_delta
+      content_tag(:th, value)
+    else
+      nil
+    end
+  end
 end

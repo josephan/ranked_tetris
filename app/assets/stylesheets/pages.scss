@@ -57,9 +57,14 @@ a {
 .green-text { color: #00c906 }
 .red-text { color: #f50400 }
 
-form {
+.user-form {
   min-width: 300px;
   max-width: 300px;
+}
+
+.match-form {
+  min-width: 400px;
+  max-width: 400px;
 }
 
 .small-button {

@@ -66,6 +66,6 @@ class MatchesController < ApplicationController
   end
 
   def match_params
-    params.require(:match).permit(:player_one_won, :player_two_id)
+    params.require(:match).permit(:player_one_won, :player_two_id, :player_one_rounds_won, :player_two_rounds_won)
   end
 end

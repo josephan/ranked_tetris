@@ -1,10 +1,10 @@
 <div class="center-elements">
   <h4>Record Match Result</h4>
   
-  <%= form_with(model: @match, local: true) do |form| %>
+  <%= form_with(model: @match, local: true, class: "match-form") do |form| %>
     <% if @match.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+        <p class="red-text"><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</p>
   
         <ul>
           <% @match.errors.full_messages.each do |message| %>
@@ -26,9 +26,15 @@
       <% end %>
     </div>
   
-      <%= form.label :player_two_id, "Who was your oppoent?" %>
-      <%= form.select :player_two_id, User.everyone_else(current_user).collect { |u| ["#{u.name} - #{u.email}", u.id] }, {prompt: "Select Opponent"}, required: true %>
+    <%= form.label :player_two_id, "Who was your oppoent?" %>
+    <%= form.select :player_two_id, User.everyone_else(current_user).collect { |u| ["#{u.name} - #{u.email}", u.id] }, {include_blank: "Select Opponent"}, required: true %>
   
+    <%= form.label :player_one_rounds_won, "How many rounds did you win?" %>
+    <%= form.select :player_one_rounds_won, [1,2,3], { include_blank: "rounds won" }, required: true %>
+
+    <%= form.label :player_two_rounds_won, "How many rounds did your opponent win?" %>
+    <%= form.select :player_two_rounds_won, [1,2,3], { include_blank: "rounds lost" }, required: true %>
+
     <div class="center-elements">
       <%= form.submit "Save Match Result" %>
     </div>
