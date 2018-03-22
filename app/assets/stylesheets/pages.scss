@@ -7,6 +7,14 @@ th, td {
   padding: 6px 0;
 }
 
+.padded-table {
+  table {
+    th, td {
+      padding: 10px 8px;
+    }
+  }
+}
+
 a {
   text-decoration: none;
 

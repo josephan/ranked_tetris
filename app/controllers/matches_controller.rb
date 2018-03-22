@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :confirm, :destroy]
 
   def index
-    @confirmed_matches = Match.confirmed
+    @confirmed_matches = Match.confirmed.paginate(page: params[:page]).order(created_at: :desc)
     @unconfirmed_matches = Match.unconfirmed
   end
 

@@ -9,18 +9,23 @@
 Match.destroy_all
 User.destroy_all
 
-u2 = User.create(name: "Stevens", email: "rip_stevens@thescore.com", elo: 10000, password: "123123")
-u = User.create(name: "Joseph", email: "joseph@thescore.com", elo: 9000, password: "123123")
-u = User.create(name: "Test", email: "test@test.com", elo: 9000, password: "123123")
-User.create(name: "McKay", email: "mckay@thescore.com", elo: 8000, password: "123123")
-User.create(name: "David", email: "david@thescore.com", elo: 7000, password: "123123")
-User.create(name: "Aaron", email: "aaron@thescore.com", elo: 6000, password: "123123")
-User.create(name: "Sacha", email: "sacha@thescore.com", elo: 5000, password: "123123")
-User.create(name: "Kuba", email: "kuba@thescore.com", elo: 4000, password: "123123")
+u = User.create(name: "Joseph", email: "joseph@thescore.com", elo: 2000, password: "123123")
+u2 = User.create(name: "Jonathan", email: "test@test.com", elo: 2000, password: "123123")
+User.create(name: "McKay", email: "mckay@thescore.com", elo: 2000, password: "123123")
+User.create(name: "David", email: "david@thescore.com", elo: 2000, password: "123123")
+User.create(name: "Aaron", email: "aaron@thescore.com", elo: 2000, password: "123123")
+User.create(name: "Sacha", email: "sacha@thescore.com", elo: 2000, password: "123123")
+User.create(name: "Kuba", email: "kuba@thescore.com", elo: 2000, password: "123123")
 
-# confirmed match
-
-# unconfirmed match
+switch = 0
+# confirmed matches
+(0..10).each do |i|
+  Match.create!(winner_id: nil, player_one: u, player_two: u2, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1)
+end
+# unconfirmed matches
+(0..20).each do |i|
+  Match.create!(winner_id: u.id, player_one: u, player_two: u2, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1)
+end
 
 puts "#{User.count} users created!"
 puts "#{Match.count} matches created!"

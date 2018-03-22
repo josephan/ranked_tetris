@@ -9,5 +9,6 @@
     <h4 class="m-0">Completed Matches</h4>
     <p>Matches that have been confirmed and elo applied.</p>
     <%= render "list", matches: @confirmed_matches, extra_info_type: :elo_delta %>
+    <%= will_paginate @confirmed_matches %>
   </div>
 </div>

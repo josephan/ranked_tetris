@@ -1,0 +1,16 @@
+<div class="center-elements">
+  <h4><%= @user.name %></h4>
+
+  <h5>Wins: <%= @user.wins %>, Losses: <%= @user.losses %>, Win Ratio: <%= @user.win_ratio %></h5>
+
+
+  <div class="row">
+    <div class="center-elements">
+      <h4>Match Results</h4>
+    </div>
+    <div class="padded-table">
+      <%= render "matches/list", matches: @matches, extra_info_type: :elo_delta %>
+      <%= will_paginate @matches %>
+    </div>
+  </div>
+</div>

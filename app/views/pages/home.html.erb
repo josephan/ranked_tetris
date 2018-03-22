@@ -17,7 +17,7 @@
           <% @users.each_with_index do |user, index| %>
             <tr>
               <td><%= index + 1 %>.</td>
-              <td><%= user.name %></td>
+              <td><%= link_to(user.name, user) %></td>
               <td><%= user.elo %></td>
               <td><%= user.wins %></td>
               <td><%= user.losses %></td>

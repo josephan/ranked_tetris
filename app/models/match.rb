@@ -18,6 +18,8 @@ class Match < ApplicationRecord
 
   before_create :generate_confirmation_uuid
 
+  self.per_page = 10
+
   def confirmed?
     winner_id.present?
   end
