@@ -15,6 +15,7 @@ class Match < ApplicationRecord
   validate :player_one_and_player_two_is_different
   validate :one_of_the_players_must_win_3_rounds
   validate :neither_of_the_players_can_win_3_rounds
+  validate :winner_has_3_rounds_won
 
   before_create :generate_confirmation_uuid
 
@@ -86,5 +87,13 @@ class Match < ApplicationRecord
 
   def neither_of_the_players_can_win_3_rounds
     errors.add(:base, :both_3_rounds, message: "both players can't have won 3 rounds") if player_one_rounds_won > 2 && player_two_rounds_won > 2
+  end
+
+  def winner_has_3_rounds_won
+    if player_one_won? && player_one_rounds_won != 3
+      errors.add(:base, :player_one_won, message: "you claimed you won but did not set the number of rounds won to 3 for yourself")
+    elsif !player_one_won? && player_two_rounds_won != 3
+      errors.add(:base, :player_one_won, message: "you claimed you lost but did not set the number of rounds won to 3 for your opponent")
+    end
   end
 end
