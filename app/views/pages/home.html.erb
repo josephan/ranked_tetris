@@ -9,8 +9,8 @@
             <th>Name</th>
             <th>Elo</th>
             <th>W</th>
-            <th>L</th>
-            <th>Ratio</th>
+            <th class="text-right">L</th>
+            <th class="text-right">Ratio</th>
           </tr>
         </thead>
         <tbody>
@@ -20,8 +20,8 @@
               <td><%= link_to(user.name, user) %></td>
               <td><%= user.elo %></td>
               <td><%= user.wins %></td>
-              <td><%= user.losses %></td>
-              <td><%= user.win_ratio %></td>
+              <td class="text-right"><%= user.losses %></td>
+              <td class="text-right"><%= user.win_ratio %></td>
             </tr>
           <% end %>
         </tbody>

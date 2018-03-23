@@ -15,6 +15,8 @@ th, td {
   }
 }
 
+th.date-played { width: 27% }
+
 .comments-container {
   padding: 0 10%;
 }
@@ -123,6 +125,7 @@ a {
 }
 
 .text-center { text-align: center; }
+.text-right { text-align: right; }
 
 .green-text { color: #00c906 }
 .red-text { color: #f50400 }
