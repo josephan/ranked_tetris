@@ -3,37 +3,42 @@
   <% if !@match.confirmed? %>
     <div class="alerts">
       <p class="alert">
-      This match has not been confirmed.<br>
-      Please tell <%= @match.player_two.name %> to visit this link and click the confirm button.<br>
-      Only <%= @match.player_two.first_name %> will be able to see that button.<br>
-      <%= @match.url %>
+        This match has not been confirmed.<br>
+        Please tell <%= @match.player_two.name %> to visit this link and click the confirm button.<br>
+        Only <%= @match.player_two.first_name %> will be able to see that button.<br>
+        <%= @match.url %>
       </p>
     </div>
   <% end %>
 
   <div class="row">
     <div class="six columns">
-      <h5>Winner</h5>
-      <p>Name: <%= @match.winner.name %></p>
-      <p>Elo gained: <span class="green-text"><%= @match.winner_delta %></span></p>
-      <p>Rounds Won: <%= @match.winner_rounds_won %></p>
+      <h5>🏆 Winner</h5>
+      <p>
+        Name: <%= @match.winner.name %><br />
+        Elo gained: <span class="green-text"><%= @match.winner_delta %></span><br />
+        Rounds Won: <%= @match.winner_rounds_won %>
+      </p>
     </div>
 
     <div class="six columns">
-      <h5>Loser</h5>
-      <p>Name: <%= @match.loser.name %></p>
-      <p>Elo lost: <span class="red-text"><%= @match.loser_delta %></span></p>
-      <p>Rounds Won: <%= @match.loser_rounds_won %></p>
+      <h5>☠️ Loser</h5>
+      <p>
+        Name: <%= @match.loser.name %><br />
+        Elo lost: <span class="red-text"><%= @match.loser_delta %></span><br />
+        Rounds Won: <%= @match.loser_rounds_won %>
+      </p>
     </div>
   </div>
 
-
   <% if @match.winner_id.blank? && current_user.id == @match.player_two_id %>
-    <p>Hello <%= current_user.first_name %>, please confirm the match results by clicking the button below.</p>
+    <p>
+    Hello <%= current_user.first_name %>, please confirm the match results by clicking the button below.<br />
+    If there is an issue with the result please contact the system administrator.
+    </p>
     <div class="center-elements">
       <%= button_to "Confirm Match Result", { action: "confirm", confirmation_uuid: @match.confirmation_uuid } %>
     </div>
-    <p>If there is an issue with the result please contact the system administrator.</p>
   <% end %>
 
   <% if @match.player_one_id == current_user.id && !@match.confirmed? %>
@@ -41,7 +46,29 @@
       <%= button_to "Delete Match", { action: "destroy" }, method: :delete, data: { confirm: "Are you sure you want to delete this match?" } %>
     </div>
   <% end %>
+</div>
 
+<div class="comments-container">
+  <div class="row">
+    <%= form_with model: @comment, class: "comment-form" do |f| %>
+      <%= f.hidden_field :match_id, value: @match.id %>
+      <div class="comment-input">
+        <%= f.text_field :body, id: "comment-body-input", placeholder: "Say something nice! 😊", class: "u-full-width", required: true %>
+      </div>
+      <div class="comment-submit">
+        <%= f.submit "Add Comment" %>
+      </div>
+    <% end %>
+  </div>
 
-  <%= link_to 'Back', matches_path %>
+  <div class="row" id="comments-list">
+    <% if @comments.present? %>
+      <% @comments.each do |comment| %>
+        <div class="comment mb-20">
+          <div class="commenter"><%= comment.user.name %> <span class="comment-time">(<%= time_ago_in_words(comment.created_at, include_seconds: true) %> ago)</span></div>
+          <div class="comment-body"><%= comment.body %></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

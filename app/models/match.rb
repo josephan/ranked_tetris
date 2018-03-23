@@ -3,9 +3,12 @@ class Match < ApplicationRecord
   belongs_to :player_two, class_name: "User"
   belongs_to :winner, class_name: "User", optional: true
 
+  has_many :comments, dependent: :destroy
+
   scope :confirmed, -> { where.not(winner_id: nil) }
   scope :unconfirmed, -> { where(winner_id: nil) }
   scope :recent, -> { order(created_at: :desc).limit(10) }
+  scope :latest, -> { order(created_at: :desc) }
 
   validates_presence_of :player_one_id, :player_two_id, :player_one_elo_delta, :player_two_elo_delta
   validates :player_one_won, inclusion: { in: [true, false] }

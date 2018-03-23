@@ -24,10 +24,11 @@
             <%= match.loser.name %>
             <%= extra_info(is_winner: false, match: match, type: extra_info_type) %>
           </td>
-          <td><%= match.date %></td>
           <td>
+            <%= time_ago_in_words(match.created_at).gsub('about', '') %> ago<br />
             <% if user_signed_in? %>
-              (<%= link_to("Show", match_path(match)) %>)
+              <% match_link_class = match.comments_count > 0 ? "bold-text" : "" %>
+              (<%= link_to("#{match.comments_count} comments", match_path(match), class: match_link_class) %>)
             <% end %>
           </td>
         </tr>

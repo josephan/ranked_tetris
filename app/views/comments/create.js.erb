@@ -1,0 +1,37 @@
+// get comment list from rendered html page
+var commentList = document.getElementById('comments-list');
+
+// create comment container
+var commentContainer = document.createElement('div');
+commentContainer.classList.add('comment', 'mb-20');
+
+// create commenter
+var commenter = document.createElement('div');
+commenter.classList.add('commenter');
+commenter.appendChild(document.createTextNode("<%= @comment.user.name %> "));
+
+// create comment time span
+var commentedTimeSpan = document.createElement('span');
+commentedTimeSpan.classList.add('comment-time');
+commentedTimeSpan.appendChild(document.createTextNode("(just now)"));
+
+// append comment time span to commenter
+commenter.appendChild(commentedTimeSpan);
+
+// create comment body
+var commentBody = document.createElement('div');
+commentBody.classList.add('comment-body');
+commentBody.appendChild(document.createTextNode("<%= @comment.body %>"));
+
+// append commenter to container
+commentContainer.appendChild(commenter);
+
+// append comment body to container
+commentContainer.appendChild(commentBody);
+
+// append comment container to DOM
+commentList.insertBefore(commentContainer, commentList.firstChild);
+
+// clear comment body input
+var commentBodyInput = document.getElementById('comment-body-input');
+commentBodyInput.value = '';

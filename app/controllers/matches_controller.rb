@@ -3,8 +3,8 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :confirm, :destroy]
 
   def index
-    @confirmed_matches = Match.confirmed.paginate(page: params[:page]).order(created_at: :desc)
-    @unconfirmed_matches = Match.unconfirmed
+    @confirmed_matches = Match.confirmed.paginate(page: params[:page]).latest
+    @unconfirmed_matches = Match.unconfirmed.latest
   end
 
   def new
@@ -12,6 +12,8 @@ class MatchesController < ApplicationController
   end
 
   def show
+    @comments = @match.comments.includes(:user).latest
+    @comment = @match.comments.new
   end
 
   def create
