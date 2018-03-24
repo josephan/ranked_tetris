@@ -8,12 +8,12 @@ commentContainer.classList.add('comment', 'mb-20');
 // create commenter
 var commenter = document.createElement('div');
 commenter.classList.add('commenter');
-commenter.appendChild(document.createTextNode("<%= @comment.user.name %> "));
+commenter.appendChild(document.createTextNode('<%= j @comment.user.name %> '));
 
 // create comment time span
 var commentedTimeSpan = document.createElement('span');
 commentedTimeSpan.classList.add('comment-time');
-commentedTimeSpan.appendChild(document.createTextNode("(just now)"));
+commentedTimeSpan.appendChild(document.createTextNode('(just now)'));
 
 // append comment time span to commenter
 commenter.appendChild(commentedTimeSpan);
@@ -21,7 +21,7 @@ commenter.appendChild(commentedTimeSpan);
 // create comment body
 var commentBody = document.createElement('div');
 commentBody.classList.add('comment-body');
-commentBody.appendChild(document.createTextNode("<%= @comment.body %>"));
+commentBody.appendChild(document.createTextNode('<%= j @comment.body.html_safe %>'));
 
 // append commenter to container
 commentContainer.appendChild(commenter);
