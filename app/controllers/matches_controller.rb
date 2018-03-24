@@ -3,8 +3,8 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :confirm, :destroy]
 
   def index
-    @confirmed_matches = Match.confirmed.paginate(page: params[:page]).latest
-    @unconfirmed_matches = Match.unconfirmed.latest
+    @confirmed_matches = Match.includes(:winner, :player_one, :player_two).confirmed.paginate(page: params[:page]).latest
+    @unconfirmed_matches = Match.includes(:player_one, :player_two).unconfirmed.latest
   end
 
   def new
