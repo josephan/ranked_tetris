@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   before_create :set_default_elo
 
@@ -6,7 +8,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :won_matches, class_name: "Match", foreign_key: "winner_id"
+  has_many :won_matches, class_name: 'Match', foreign_key: 'winner_id'
   has_many :comments
 
   validates :name, presence: true
@@ -15,26 +17,26 @@ class User < ApplicationRecord
   scope :everyone_else, ->(current_user) { where.not(id: current_user.id) }
 
   def complete_matches
-    @complete_matches ||= Match.where.not(winner_id: nil).where("player_one_id = ? OR player_two_id = ?", self.id, self.id)
+    @complete_matches ||= Match.where.not(winner_id: nil).where('player_one_id = ? OR player_two_id = ?', id, id)
   end
 
   def wins
-    @wins ||= self.won_matches.count
+    @wins ||= won_matches.count
   end
 
   def losses
-    @losses ||= self.complete_matches.count - self.wins
+    @losses ||= complete_matches.count - wins
   end
 
   def first_name
-    name.split(" ").first.capitalize
+    name.split(' ').first.capitalize
   end
 
   def win_ratio
     if @complete_matches.count > 0
       "#{(@wins.to_f / @complete_matches.count * 100).round}%"
     else
-      "-"
+      '-'
     end
   end
 

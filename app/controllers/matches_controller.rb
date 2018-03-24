@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class MatchesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_match, only: [:show, :confirm, :destroy]
+  before_action :set_match, only: %i[show confirm destroy]
 
   def index
     @confirmed_matches = Match.includes(:winner, :player_one, :player_two).confirmed.paginate(page: params[:page]).latest
@@ -21,7 +23,7 @@ class MatchesController < ApplicationController
     player_two = User.find(match_params[:player_two_id])
 
     match = EloRating::Match.new
-    if match_params[:player_one_won] == "true"
+    if match_params[:player_one_won] == 'true'
       match.add_player(rating: player_one.elo, winner: true)
       match.add_player(rating: player_two.elo)
     else
@@ -55,18 +57,18 @@ class MatchesController < ApplicationController
       @match.update(winner_id: winner_id)
       @match.player_one.update(elo: @match.player_one.elo + @match.player_one_elo_delta)
       @match.player_two.update(elo: @match.player_two.elo + @match.player_two_elo_delta)
-      redirect_to @match, notice: "Thank you for confirming the match. Your elos have been updated!"
+      redirect_to @match, notice: 'Thank you for confirming the match. Your elos have been updated!'
     else
-      redirect_to @match, notice: "Sorry you do not have the permission to confirm this match."
+      redirect_to @match, notice: 'Sorry you do not have the permission to confirm this match.'
     end
   end
 
   def destroy
     if @match.player_one_id == current_user.id && !@match.confirmed?
       @match.destroy
-      redirect_to matches_url, notice: "Match successfully deleted."
+      redirect_to matches_url, notice: 'Match successfully deleted.'
     else
-      redirect_to @match, alert: "You do not have the permissions to delete this match."
+      redirect_to @match, alert: 'You do not have the permissions to delete this match.'
     end
   end
 
