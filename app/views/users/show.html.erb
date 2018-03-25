@@ -2,15 +2,43 @@
   <h4><%= @user.name %></h4>
 
   <h5>Wins: <%= @user.wins %>, Losses: <%= @user.losses %>, Win Ratio: <%= @user.win_ratio %></h5>
+</div>
 
 
-  <div class="row">
-    <div class="center-elements">
-      <h4>Match Results</h4>
-    </div>
-    <div class="padded-table">
-      <%= render "matches/list", matches: @matches, extra_info_type: :elo_delta %>
-      <%= will_paginate @matches %>
-    </div>
+<div class="row">
+  <div class="six columns">
+    <h4>Record Against</h4>
+    <% if @matches.present? %>
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Opponent</th>
+          <th>W</th>
+          <th class="text-right">L</th>
+          <th class="text-right">Ratio</th>
+          <th class="text-right">Odds</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @matches.group_by { |m| m.opponent_of(@user) }.each do |opponent, matches| %>
+          <tr>
+            <td><%= link_to(opponent.name, user_path(opponent)) %></td>
+            <td><%= matches.select { |m| m.winner_id == current_user.id }.count %></td>
+            <td class="text-right"><%= matches.select { |m| m.winner_id != current_user.id }.count %></td>
+            <td class="text-right"><%= (matches.select { |m| m.winner_id == current_user.id }.count.to_f / matches.length).round %>%</td>
+            <td class="text-right"><%= (EloRating.expected_score(@user.elo, opponent.elo) * 100).round %>%</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No matches yet...</p>
+  <% end %>
+  </div>
+
+  <div class="six columns">
+    <h4>Match Results</h4>
+    <%= render "matches/list", matches: @paginated_matches, extra_info_type: :elo_delta %>
+    <%= will_paginate @paginated_matches %>
   </div>
 </div>

@@ -76,6 +76,11 @@ class Match < ApplicationRecord
     player_one_is_winner? ? player_two_rounds_won : player_one_rounds_won
   end
 
+  def opponent_of(player)
+    return if player.id != player_one_id && player.id != player_two_id
+    player.id == player_one_id ? player_two : player_one
+  end
+
   private
 
   def generate_confirmation_uuid
