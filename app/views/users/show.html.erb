@@ -23,9 +23,9 @@
         <% @matches.group_by { |m| m.opponent_of(@user) }.each do |opponent, matches| %>
           <tr>
             <td><%= link_to(opponent.name, user_path(opponent)) %></td>
-            <td><%= matches.select { |m| m.winner_id == current_user.id }.count %></td>
-            <td class="text-right"><%= matches.select { |m| m.winner_id != current_user.id }.count %></td>
-            <td class="text-right"><%= (matches.select { |m| m.winner_id == current_user.id }.count.to_f / matches.length).round %>%</td>
+            <td><%= matches.select { |m| m.winner_id == @user.id }.count %></td>
+            <td class="text-right"><%= matches.select { |m| m.winner_id != @user.id }.count %></td>
+            <td class="text-right"><%= (matches.select { |m| m.winner_id == @user.id }.count.to_f / matches.length * 100).round %>%</td>
             <td class="text-right"><%= (EloRating.expected_score(@user.elo, opponent.elo) * 100).round %>%</td>
           </tr>
         <% end %>
