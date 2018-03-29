@@ -6,9 +6,9 @@ module Slack
     options = {
       body: {
         text: message
-      },
+      }.to_json,
       headers: {
-        "Content-type" => "application/json"
+        "Content-Type" => "application/json"
       }
     }
 
