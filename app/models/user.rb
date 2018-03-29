@@ -32,6 +32,14 @@ class User < ApplicationRecord
     name.split(' ').first.capitalize
   end
 
+  def first_and_last
+    split_name = name.split(' ')
+    return name.capitalize if split_name.length < 2
+    first_name = split_name.first.capitalize
+    last_name_letter = split_name.last[0].upcase
+    "#{first_name} #{last_name_letter}."
+  end
+
   def win_ratio
     if @complete_matches.count > 0
       "#{(@wins.to_f / @complete_matches.count * 100).round}%"

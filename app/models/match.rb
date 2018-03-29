@@ -81,6 +81,12 @@ class Match < ApplicationRecord
     player.id == player_one_id ? player_two : player_one
   end
 
+  def message
+    if confirmed?
+      "#{winner.first_and_last} just beat #{loser.first_and_last} (#{result})\n<#{url}|Click Here> for details!"
+    end
+  end
+
   private
 
   def generate_confirmation_uuid

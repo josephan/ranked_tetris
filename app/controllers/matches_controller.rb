@@ -57,6 +57,7 @@ class MatchesController < ApplicationController
       @match.update(winner_id: winner_id)
       @match.player_one.update(elo: @match.player_one.elo + @match.player_one_elo_delta)
       @match.player_two.update(elo: @match.player_two.elo + @match.player_two_elo_delta)
+      Slack.send_message(@match.message)
       redirect_to @match, notice: 'Thank you for confirming the match. Your elos have been updated!'
     else
       redirect_to @match, notice: 'Sorry you do not have the permission to confirm this match.'
