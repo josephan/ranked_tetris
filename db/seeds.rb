@@ -12,7 +12,7 @@ Match.destroy_all
 User.destroy_all
 
 u = User.create(name: 'Joseph', email: 'joseph@thescore.com', elo: 2000, password: '123123')
-u2 = User.create(name: 'Jonathan', email: 'test@test.com', elo: 2000, password: '123123')
+u2 = User.create(name: 'Jonathan', email: 'test@test.com', elo: 2000, password: '123123', admin: true)
 User.create(name: 'McKay', email: 'mckay@thescore.com', elo: 2000, password: '123123')
 User.create(name: 'David', email: 'david@thescore.com', elo: 2000, password: '123123')
 User.create(name: 'Aaron', email: 'aaron@thescore.com', elo: 2000, password: '123123')
