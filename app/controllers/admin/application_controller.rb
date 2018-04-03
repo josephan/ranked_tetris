@@ -10,8 +10,10 @@ module Admin
     before_action :authenticate_admin
 
     def authenticate_admin
-      flash[:alert] = "You must be an admin to access this page."
-      redirect_to root_path unless current_user.admin?
+      unless current_user.admin?
+        flash[:alert] = "You must be an admin to access that page."
+        redirect_to root_path
+      end
     end
 
     # Override this value to specify the number of elements to display at a time

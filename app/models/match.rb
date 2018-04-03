@@ -82,6 +82,12 @@ class Match < ApplicationRecord
   def message
     if confirmed?
       "#{winner.first_and_last} just beat #{loser.first_and_last} (#{result})\n<#{url}|Click Here> for details!"
+    else
+      if player_one_won?
+        "Greetings #{player_two.first_and_last}, you have lost to #{player_one.first_and_last}.\nPlease confirm the match: <#{url}>"
+      else
+        "Greetings #{player_two.first_and_last}, you have defeated #{player_one.first_and_last}!\nPlease confirm the match: <#{url}>"
+      end
     end
   end
 

@@ -48,6 +48,10 @@ class User < ApplicationRecord
     end
   end
 
+  def slack?
+    slack_webhook_url.present?
+  end
+
   private
 
   def set_default_elo

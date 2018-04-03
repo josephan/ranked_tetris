@@ -43,6 +43,7 @@ class MatchesController < ApplicationController
     @match = Match.new(match_params.merge(extra_params))
 
     if @match.save
+      GhettoSlack.send_to_user(player_two, @match.message)
       redirect_to @match, notice: "Result successfully recorded. Your opponents needs to confirm the results here: #{@match.url}"
     else
       render :new

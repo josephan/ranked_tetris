@@ -17,5 +17,11 @@ Rails.application.routes.draw do
   resources 'users', only: [:show]
   resources 'comments', only: [:create]
 
+  get "/slack/oauth", to: "slack#oauth"
+  delete "/slack/oauth", to: "slack#destroy"
+
+  get "/profile", to: "pages#profile"
+  patch "/profile", to: "pages#update_profile"
+  put "/profile", to: "pages#update_profile"
   root to: 'pages#home'
 end

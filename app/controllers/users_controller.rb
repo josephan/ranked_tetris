@@ -2,10 +2,16 @@
 
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user
 
   def show
-    @user = User.find(params[:id])
     @matches = @user.complete_matches.includes(:winner, :player_one, :player_two)
     @paginated_matches = @matches.page(params[:page]).order(created_at: :desc)
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
