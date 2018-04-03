@@ -39,6 +39,6 @@
   <div class="six columns">
     <h4>Match Results</h4>
     <%= render "matches/list", matches: @paginated_matches, extra_info_type: :elo_delta %>
-    <%= will_paginate @paginated_matches %>
+    <%= paginate @paginated_matches %>
   </div>
 </div>

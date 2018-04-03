@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :users
+    resources :comments
+    resources :matches
+
+    root to: "users#index"
+  end
+
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
   resources 'matches', except: %i[edit update]
