@@ -1,4 +1,4 @@
-module Slack
+module GhettoSlack
   def self.send_message(message)
     webhook_url = ENV["SLACK_WEBHOOK_URL"]
     return unless webhook_url.present?
