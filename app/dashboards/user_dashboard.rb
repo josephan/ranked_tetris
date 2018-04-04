@@ -19,6 +19,7 @@ class UserDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     email: Field::String,
     admin: Field::Boolean,
+    slack_webhook_url: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -58,6 +59,8 @@ class UserDashboard < Administrate::BaseDashboard
     :retired,
     :email,
     :admin,
+    :slack_webhook_url,
+    :elo,
     :password,
   ].freeze
 
