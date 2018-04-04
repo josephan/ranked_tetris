@@ -28,10 +28,10 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :won_matches,
-    :comments,
     :id,
     :name,
+    :email,
+    :slack_webhook_url,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
