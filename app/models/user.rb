@@ -17,7 +17,7 @@ class User < ApplicationRecord
   scope :everyone_else, ->(current_user) { where.not(id: current_user.id) }
 
   def complete_matches
-    @complete_matches ||= Match.where.not(winner_id: nil).where('player_one_id = ? OR player_two_id = ?', id, id)
+    @complete_matches ||= Match.where.not(winner_id: nil).where('player_one_id = ? OR player_two_id = ?', id, id).order(created_at: :asc)
   end
 
   def wins
@@ -40,32 +40,11 @@ class User < ApplicationRecord
     "#{first_name} #{last_name_letter}."
   end
 
-  def win_streak
-    streak = "-"
-    if @complete_matches.count > 0
-      if @complete_matches.last.winner.id == id
-        streak = "W"
-        lastId = @complete_matches.last.winner.id
-      else
-        streak = "L"
-        lastId = @complete_matches.last.loser.id
-      end
-      count = 0
-
-      @complete_matches.reverse_each { |val|
-        if lastId == val.winner.id && streak == "W"
-          count += 1
-          lastId = val.winner.id
-        elsif lastId == val.loser.id && streak == "L"
-          count += 1
-          lastId = val.loser.id
-        else
-          break
-        end
-        }
-      return streak + count.to_s
-    end
-    return streak
+  def win_loss_streak
+    return "-" if @complete_matches.blank?
+    last_match_won = @complete_matches.last.winner_id == id
+    streak = @complete_matches.reverse.take_while { |match| (id == match.winner_id && last_match_won) || (id != match.winner_id && !last_match_won) }.count
+    "#{last_match_won ? "W" : "L"}#{streak}"
   end
 
   def win_ratio

@@ -19,22 +19,22 @@ User.create(name: 'Aaron', email: 'aaron@thescore.com', elo: 2000, password: '12
 User.create(name: 'Sacha', email: 'sacha@thescore.com', elo: 2000, password: '123123')
 User.create(name: 'Kuba', email: 'kuba@thescore.com', elo: 2000, password: '123123')
 
-switch = 0
-# confirmed matches
-(0..10).each do |_i|
-  Match.create!(winner_id: nil, player_one: u, player_two: u2, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1)
-end
 # unconfirmed matches
-(0..20).each do |_i|
-  Match.create!(winner_id: u.id, player_one: u, player_two: u2, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1)
+(0..10).each do |i|
+  time = Time.now + i.minute
+  Match.create!(winner_id: nil, player_one: u, player_two: u2, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1, created_at: time, updated_at: time)
 end
 
 # confirmed matches
+(0..20).each do |i|
+  time = Time.now + i.minute
+  Match.create!(winner_id: u.id, player_one: u, player_two: u2, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1, created_at: time, updated_at: time)
+end
+
 (0..2).each do |_i|
   Match.create!(winner_id: u3.id, player_one: u3, player_two: u4, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1)
 end
 
-# confirmed matches
 (0..2).each do |_i|
   Match.create!(winner_id: u4.id, player_one: u4, player_two: u3, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1)
 end
