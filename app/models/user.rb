@@ -17,7 +17,7 @@ class User < ApplicationRecord
   scope :everyone_else, ->(current_user) { where.not(id: current_user.id) }
 
   def complete_matches
-    @complete_matches ||= Match.where.not(winner_id: nil).where('player_one_id = ? OR player_two_id = ?', id, id)
+    @complete_matches ||= Match.where.not(winner_id: nil).where('player_one_id = ? OR player_two_id = ?', id, id).order(created_at: :asc)
   end
 
   def wins
