@@ -11,6 +11,7 @@
             <th>W</th>
             <th class="text-right">L</th>
             <th class="text-right">Ratio</th>
+            <th class="text-right">Streak</th>
           </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@
               <td><%= user.wins %></td>
               <td class="text-right"><%= user.losses %></td>
               <td class="text-right"><%= user.win_ratio %></td>
+              <td class="text-right"><%= user.win_loss_streak %></td>
             </tr>
           <% end %>
         </tbody>

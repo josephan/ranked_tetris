@@ -40,6 +40,15 @@ class User < ApplicationRecord
     "#{first_name} #{last_name_letter}."
   end
 
+  def win_loss_streak
+    return "-" if 
+    @complete_matches.blank?
+      last_match_won = @complete_matches.last.winner_id == id
+      streak = @complete_matches.reverse.take_while { |match| (id == match.winner_id && 
+        last_match_won) || (id != match.winner_id && !last_match_won)}.count
+      "#{last_match_won ? "W": "L"}#{streak}"
+  end
+
   def win_ratio
     if @complete_matches.count > 0
       "#{(@wins.to_f / @complete_matches.count * 100).round}%"
