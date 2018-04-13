@@ -1,12 +1,12 @@
 <div class="center-elements">
   <h4>Record Match Result</h4>
-  
+
   <%= form_with(model: @match, local: true, html: { class: "match-form" }) do |form| %>
     <%= render "shared/errors", object: @match %>
-  
+
     <%= form.label :player_one_won, "Did you win the match, #{current_user.first_name}?" %>
     <div class="inline-elements">
-      <%= form.label :player_one_won, value: true, checked: true, class: "mr-20", for: "yesPlayerOneWon" do %>
+      <%= form.label :player_one_won, value: true, class: "mr-20", for: "yesPlayerOneWon" do %>
         <%= form.radio_button :player_one_won, true, id: "yesPlayerOneWon" %>
         <span class="label-body">Yes</span>
       <% end %>
@@ -15,20 +15,38 @@
         <span class="label-body">No</span>
       <% end %>
     </div>
-  
+
     <%= form.label :player_two_id, "Who was your oppoent?" %>
     <%= form.select :player_two_id, User.everyone_else(current_user).collect { |u| ["#{u.name}", u.id] }, {include_blank: "Select Opponent"}, required: true %>
-  
+
     <%= form.label :player_one_rounds_won, "How many rounds did you win?" %>
-    <%= form.select :player_one_rounds_won, [0,1,2,3], { include_blank: "rounds won" }, required: true %>
+    <%= form.select :player_one_rounds_won, [0,1,2,3], { include_blank: "rounds won" }, required: true, id: "playerOneRoundsWon" %>
 
     <%= form.label :player_two_rounds_won, "How many rounds did your opponent win?" %>
-    <%= form.select :player_two_rounds_won, [0,1,2,3], { include_blank: "rounds lost" }, required: true %>
+    <%= form.select :player_two_rounds_won, [0,1,2,3], { include_blank: "rounds lost" }, required: true, id: "playerTwoRoundsWon" %>
 
     <div class="center-elements">
       <%= form.submit "Save Match Result" %>
     </div>
   <% end %>
-  
+
   <%= link_to 'Cancel', root_path %>
 </div>
+
+<% content_for :end_of_body_javascript do %>
+  <script>
+    document.getElementById('yesPlayerOneWon').addEventListener("click", function() {
+      if(this.checked) {
+        document.getElementById('playerOneRoundsWon').value = '3';
+        document.getElementById('playerTwoRoundsWon').value = '';
+      }
+    });
+    document.getElementById('noPlayerOneWon').addEventListener("click", function() {
+      if(this.checked) {
+        document.getElementById('playerOneRoundsWon').value = '';
+        document.getElementById('playerTwoRoundsWon').value = '3';
+      }
+    });
+    document.getElementById('yesPlayerOneWon').click();
+  </script>
+<% end %>
