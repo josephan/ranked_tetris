@@ -15,7 +15,6 @@ class PagesController < ApplicationController
     if current_user.update(user_params)
       redirect_to profile_url, notice: "Your account has been updated!"
     else
-      flash["alert"] = "Oops something wen't wrong"
       render "profile"
     end
   end

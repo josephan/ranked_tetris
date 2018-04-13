@@ -2,6 +2,8 @@
   <h4>Edit Account</h4>
 
   <%= form_for(current_user, url: profile_url, html: { class: "user-form" }) do |f| %>
+    <%= render "shared/errors", object: current_user %>
+
     <%= f.label :name, "Full Name" %>
     <%= f.text_field :name, class: "u-full-width" %>
 

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @matches = @user.complete_matches.includes(:winner, :player_one, :player_two)
-    @paginated_matches = @matches.page(params[:page]).order(created_at: :desc)
+    @paginated_matches = @matches.page(params[:page]).sort_by(&:id)
   end
 
   private
