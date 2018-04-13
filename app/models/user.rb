@@ -20,6 +20,10 @@ class User < ApplicationRecord
     @complete_matches ||= Match.where.not(winner_id: nil).where('player_one_id = ? OR player_two_id = ?', id, id).order(created_at: :asc)
   end
 
+  def latest_complete_matches
+    @latest_complete_matches ||= Match.where.not(winner_id: nil).where('player_one_id = ? OR player_two_id = ?', id, id).order(created_at: :desc)
+  end
+
   def wins
     @wins ||= won_matches.count
   end
