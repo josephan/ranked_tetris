@@ -5,7 +5,7 @@
       <table class="u-full-width">
         <thead>
           <tr>
-            <th>Rank</th>
+            <th></th>
             <th>Name</th>
             <th>Elo</th>
             <th>W</th>
@@ -15,10 +15,10 @@
           </tr>
         </thead>
         <tbody>
-          <% @users.each_with_index do |user, index| %>
+          <% @users.each.with_index(1) do |user, rank| %>
             <tr>
-              <td><%= index + 1 %>.</td>
-              <td><%= link_to(user.name, user) %> <%= medal(index, @users.length) %></td>
+              <td style="text-align: center"><%= display_rank(rank, @users.length) %></td>
+              <td><%= link_to(user.name, user) %></td>
               <td><%= user.elo %></td>
               <td><%= user.wins %></td>
               <td class="text-right"><%= user.losses %></td>
