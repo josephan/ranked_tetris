@@ -4,7 +4,8 @@ class PagesController < ApplicationController
   before_action :authenticate_user!, only: %i[profile update_profile]
 
   def home
-    @users = User.ranked
+    @ranked_users = User.ranked
+    @unranked_users = User.unranked
     @matches = Match.includes(:winner, :player_one, :player_two).confirmed.recent
   end
 

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="six columns">
     <h4>Ranking</h4>
-    <% if @users.present? %>
+    <% if @ranked_users.present? %>
       <table class="u-full-width">
         <thead>
           <tr>
@@ -15,9 +15,9 @@
           </tr>
         </thead>
         <tbody>
-          <% @users.each.with_index(1) do |user, rank| %>
+          <% @ranked_users.each.with_index(1) do |user, rank| %>
             <tr>
-              <td style="text-align: center"><%= display_rank(rank, @users.length) %></td>
+              <td style="text-align: center"><%= display_rank(rank, @ranked_users.length) %></td>
               <td><%= link_to(user.name, user) %></td>
               <td><%= user.elo %></td>
               <td><%= user.wins %></td>
@@ -25,6 +25,21 @@
               <td class="text-right"><%= user.win_ratio %></td>
               <td class="text-right"><%= user.win_loss_streak %></td>
             </tr>
+          <% end %>
+
+          <% if @unranked_users.present? %>
+            <tr><td colspan="7">Unranked Players</td></tr>
+            <% @unranked_users.each do |user| %>
+              <tr style="opacity: 0.55">
+                <td></td>
+                <td><%= link_to(user.name, user) %></td>
+                <td><%= user.elo %></td>
+                <td>0</td>
+                <td class="text-right">0</td>
+                <td class="text-right">0</td>
+                <td class="text-right">&mdash;</td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>

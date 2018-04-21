@@ -13,15 +13,24 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :ranked, -> { order(elo: :desc) }
   scope :everyone_else, ->(current_user) { where.not(id: current_user.id).order(:name) }
 
+  def self.ranked
+    order(elo: :desc).select do |user|
+      user.complete_matches.any?
+    end
+  end
+
+  def self.unranked
+    where.not(id: ranked).order(:created_at)
+  end
+
   def complete_matches
-    @complete_matches ||= Match.where.not(winner_id: nil).where('player_one_id = ? OR player_two_id = ?', id, id).order(created_at: :asc)
+    @complete_matches ||= Match.confirmed.where('player_one_id = ? OR player_two_id = ?', id, id).order(created_at: :asc)
   end
 
   def latest_complete_matches
-    @latest_complete_matches ||= Match.where.not(winner_id: nil).where('player_one_id = ? OR player_two_id = ?', id, id).order(created_at: :desc)
+    @latest_complete_matches ||= Match.confirmed.where('player_one_id = ? OR player_two_id = ?', id, id).order(created_at: :desc)
   end
 
   def wins
@@ -45,15 +54,15 @@ class User < ApplicationRecord
   end
 
   def win_loss_streak
-    return "-" if @complete_matches.blank?
-    last_match_won = @complete_matches.last.winner_id == id
-    streak = @complete_matches.reverse.take_while { |match| (id == match.winner_id && last_match_won) || (id != match.winner_id && !last_match_won) }.count
+    return "-" if complete_matches.blank?
+    last_match_won = complete_matches.last.winner_id == id
+    streak = complete_matches.reverse.take_while { |match| (id == match.winner_id && last_match_won) || (id != match.winner_id && !last_match_won) }.count
     "#{last_match_won ? "W" : "L"}#{streak}"
   end
 
   def win_ratio
-    if @complete_matches.count > 0
-      "#{(@wins.to_f / @complete_matches.count * 100).round}%"
+    if complete_matches.count > 0
+      "#{(@wins.to_f / complete_matches.count * 100).round}%"
     else
       '-'
     end
