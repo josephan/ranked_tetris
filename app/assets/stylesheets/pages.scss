@@ -15,6 +15,23 @@ th, td {
   }
 }
 
+.image {
+  margin: 0 auto;
+  img {
+    border-radius: 5px;
+  }
+}
+
+.image-md {
+  width: 200px;
+  height: 200px;
+}
+
+.image-sm {
+  width: 150px;
+  height: 150px;
+}
+
 th.date-played { width: 27% }
 
 .comments-container {

@@ -1,6 +1,10 @@
 <div class="center-elements">
   <h4><%= @user.name %></h4>
-
+    <div class="image image-md mb-20">
+      <% if @user.avatar.attached? %>
+        <%= image_tag(@user.avatar, class: "u-max-full-width") %>
+      <% end %>
+    </div>
   <h5>Wins: <%= @user.wins %>, Losses: <%= @user.losses %>, Win Ratio: <%= @user.win_ratio %></h5>
 </div>
 

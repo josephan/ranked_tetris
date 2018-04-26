@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :won_matches, class_name: 'Match', foreign_key: 'winner_id'
   has_many :comments
 
+  has_one_attached :avatar
+
   validates :name, presence: true
 
   scope :everyone_else, ->(current_user) { where.not(id: current_user.id).order(:name) }

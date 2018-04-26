@@ -13,21 +13,41 @@
 
   <div class="row">
     <div class="six columns">
-      <h5>🏆 Winner</h5>
-      <p>
-        Name: <%= @match.winner.name %><br />
-        Elo gained: <span class="green-text"><%= @match.winner_delta %></span><br />
-        Rounds Won: <%= @match.winner_rounds_won %>
-      </p>
+      <div class="centered-content">
+        <h5>🏆 Winner</h5>
+        <p>
+          <div class="image image-sm mb-20">
+            <% if @match.winner.avatar.attached? %>
+              <% if @match.winner.avatar.attached? %>
+                <%= image_tag(@match.winner.avatar, class: "u-max-full-width") %>
+              <% else %>
+                <%= image_tag('profile.png', class: "u-max-full-width") %>
+              <% end %>
+            <% end %>
+          </div>
+          Name: <%= @match.winner.name %><br />
+          Elo gained: <span class="green-text"><%= @match.winner_delta %></span><br />
+          Rounds Won: <%= @match.winner_rounds_won %>
+        </p>
+      </div>
     </div>
 
     <div class="six columns">
-      <h5>☠️ Loser</h5>
-      <p>
-        Name: <%= @match.loser.name %><br />
-        Elo lost: <span class="red-text"><%= @match.loser_delta %></span><br />
-        Rounds Won: <%= @match.loser_rounds_won %>
-      </p>
+      <div class="centered-content">
+        <h5>☠️ Loser</h5>
+        <p>
+          <div class="image image-sm mb-20">
+            <% if @match.loser.avatar.attached? %>
+                <%= image_tag(@match.loser.avatar, class: "u-max-full-width") %>
+              <% else %>
+                <%= image_tag('profile.png', class: "u-max-full-width") %>
+            <% end %>
+          </div>
+          Name: <%= @match.loser.name %><br />
+          Elo lost: <span class="red-text"><%= @match.loser_delta %></span><br />
+          Rounds Won: <%= @match.loser_rounds_won %>
+        </p>
+      </div>
     </div>
   </div>
 

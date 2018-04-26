@@ -4,6 +4,13 @@
   <%= form_for(current_user, url: profile_url, html: { class: "user-form" }) do |f| %>
     <%= render "shared/errors", object: current_user %>
 
+    <% if current_user.avatar.attached? %>
+      <%= image_tag(current_user.avatar, class: "u-max-full-width") %>
+    <% end %>
+
+    <%= f.label :avatar, "Profile Picture" %>
+    <%= f.file_field :avatar %>
+
     <%= f.label :name, "Full Name" %>
     <%= f.text_field :name, class: "u-full-width" %>
 
