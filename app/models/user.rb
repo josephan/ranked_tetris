@@ -15,6 +15,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
+  scope :active, -> { where(retired: false) }
   scope :everyone_else, ->(current_user) { where.not(id: current_user.id).order(:name) }
 
   def self.ranked

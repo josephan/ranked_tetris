@@ -1,0 +1,18 @@
+<h3 class="text-center">Hall of Fame</h3>
+<% @retired_users.each_slice(3) do |users| %>
+  <div class="row">
+    <% users.each do |user| %>
+      <div class="four columns">
+        <div class="center-elements">
+          <div class="image image-md mb-20">
+            <% if user.avatar.attached? %>
+              <%= image_tag(user.avatar, class: "u-max-full-width") %>
+            <% end %>
+          </div>
+          <h5><%= user.name %></h5>
+          <h6>Elo: <%= user.elo %>, Wins: <%= user.wins %>, Losses: <%= user.losses %>, Win Ratio: <%= user.win_ratio %></h6>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

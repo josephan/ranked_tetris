@@ -18,6 +18,10 @@ u4 =User.create(name: 'David', email: 'david@thescore.com', elo: 2000, password:
 User.create(name: 'Aaron', email: 'aaron@thescore.com', elo: 2000, password: '123123')
 User.create(name: 'Sacha', email: 'sacha@thescore.com', elo: 2000, password: '123123')
 User.create(name: 'Kuba', email: 'kuba@thescore.com', elo: 2000, password: '123123')
+User.create(name: 'Ryan', email: 'ryan.wang@thescore.com', elo: 1000, password: '123123', retired: true)
+User.create(name: 'Nic', email: 'nic@thescore.com', elo: 1000, password: '123123', retired: true)
+User.create(name: 'Albert', email: 'albert@thescore.com', elo: 1000, password: '123123', retired: true)
+User.create(name: 'Stevens', email: 'stevens@thescore.com', elo: 1000, password: '123123', retired: true)
 
 time = Time.zone.now
 # confirmed matches

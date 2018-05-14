@@ -12,7 +12,6 @@ class UserDashboard < Administrate::BaseDashboard
     comments: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    password: Field::String,
     elo: Field::Number,
     retired: Field::Boolean,
     created_at: Field::DateTime,
@@ -61,7 +60,6 @@ class UserDashboard < Administrate::BaseDashboard
     :admin,
     :slack_webhook_url,
     :elo,
-    :password,
   ].freeze
 
   # Overwrite this method to customize how users are displayed
