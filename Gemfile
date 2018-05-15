@@ -40,6 +40,7 @@ gem 'skeleton-rails', git: 'https://github.com/helios-technologies/skeleton-rail
 gem 'kaminari'
 gem 'httparty'
 gem 'administrate', github: 'thoughtbot/administrate', branch: 'master'
+gem "aws-sdk-s3", require: false
 
 
 group :development, :test do
