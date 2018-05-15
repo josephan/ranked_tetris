@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   end
 
   def hall_of_fame
-    @retired_users = User.where(retired: true).sort(elo: :desc)
+    @retired_users = User.where(retired: true).order(elo: :desc)
   end
 
   def profile
