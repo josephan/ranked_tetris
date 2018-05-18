@@ -20,7 +20,7 @@
             <% if @match.winner.avatar.attached? %>
               <%= image_tag(@match.winner.avatar, class: "u-max-full-width") %>
             <% else %>
-              <%= image_tag(@match.winner.default_avatar), class: "u-max-full-width") %>
+              <%= image_tag(@match.winner.default_avatar, class: "u-max-full-width") %>
             <% end %>
           </div>
           Name: <%= @match.winner.name %><br />
@@ -38,7 +38,7 @@
             <% if @match.loser.avatar.attached? %>
               <%= image_tag(@match.loser.avatar, class: "u-max-full-width") %>
             <% else %>
-              <%= image_tag(@match.loser.default_avatar), class: "u-max-full-width") %>
+              <%= image_tag(@match.loser.default_avatar, class: "u-max-full-width") %>
             <% end %>
           </div>
           Name: <%= @match.loser.name %><br />
