@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   def self.ranked
     order(elo: :desc).select do |user|
-      user.complete_matches.any?
+      user.complete_matches.count >= 5 && user.complete_matches.last.created_at >= 1.week.ago
     end
   end
 
@@ -46,6 +46,10 @@ class User < ApplicationRecord
 
   def first_name
     name.split(' ').first.capitalize
+  end
+
+  def default_avatar
+    "tetris#{default_image}.png"
   end
 
   def first_and_last

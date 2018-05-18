@@ -6,6 +6,8 @@
 
     <% if current_user.avatar.attached? %>
       <%= image_tag(current_user.avatar, class: "u-max-full-width") %>
+    <% else %>
+      <%= image_tag(current_user.default_avatar, class: "u-max-full-width") %>
     <% end %>
 
     <%= f.label :avatar, "Profile Picture" %>

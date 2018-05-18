@@ -34,12 +34,12 @@ end
 end
 
 
-(0..2).each do |_i|
-  Match.create!(winner_id: u3.id, player_one: u3, player_two: u4, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1)
+(0..3).each do |_i|
+  Match.create!(winner_id: u3.id, player_one: u3, player_two: u4, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1, created_at: 2.weeks.ago, updated_at: 2.weeks.ago)
 end
 
-(0..2).each do |_i|
-  Match.create!(winner_id: u4.id, player_one: u4, player_two: u3, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1)
+(0..3).each do |_i|
+  Match.create!(winner_id: u4.id, player_one: u4, player_two: u3, player_one_elo_delta: 10, player_two_elo_delta: -10, player_one_rounds_won: 3, player_two_rounds_won: 1, created_at: 2.weeks.ago, updated_at: 2.weeks.ago)
 end
 
 puts "#{User.count} users created!"
