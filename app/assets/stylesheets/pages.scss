@@ -84,12 +84,13 @@ a {
 
 .header-links {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   padding-left: 16px;
 
   a {
-    margin: 0 3px;
+    margin: 0 3px 6px 3px;
   }
 }
 
