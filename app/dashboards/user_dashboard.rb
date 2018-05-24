@@ -13,6 +13,7 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     elo: Field::Number,
+    default_image: Field::Number,
     retired: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -41,6 +42,7 @@ class UserDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :elo,
+    :default_image,
     :retired,
     :created_at,
     :updated_at,
@@ -60,6 +62,7 @@ class UserDashboard < Administrate::BaseDashboard
     :admin,
     :slack_webhook_url,
     :elo,
+    :default_image
   ].freeze
 
   # Overwrite this method to customize how users are displayed

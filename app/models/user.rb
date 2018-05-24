@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   before_create :set_default_elo
+  before_create :set_default_image
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -83,5 +84,9 @@ class User < ApplicationRecord
 
   def set_default_elo
     self.elo = 2000
+  end
+
+  def set_default_image
+    self.default_image = (0..6).to_a.sample
   end
 end
