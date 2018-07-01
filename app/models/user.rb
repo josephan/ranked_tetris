@@ -80,6 +80,10 @@ class User < ApplicationRecord
     slack_webhook_url.present?
   end
 
+  def unconfirmed_matches
+    @unconfirmed_matches ||= Match.where(winner_id: nil, player_two: self)
+  end
+
   private
 
   def set_default_elo
