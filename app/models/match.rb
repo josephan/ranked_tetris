@@ -1,9 +1,12 @@
 # frozen_string_literal: true
+require 'action_view'
+require 'action_view/helpers'
 
 class Match < ApplicationRecord
   belongs_to :player_one, class_name: 'User'
   belongs_to :player_two, class_name: 'User'
   belongs_to :winner, class_name: 'User', optional: true
+  include ActionView::Helpers::DateHelper
 
   has_many :comments, dependent: :destroy
 
@@ -81,7 +84,7 @@ class Match < ApplicationRecord
 
   def message
     if confirmed?
-      "#{winner.first_and_last} just beat #{loser.first_and_last} (#{result})\n<#{url}|Click Here> for details!"
+      "#{winner.first_and_last} beat #{loser.first_and_last} (#{result}), #{time_ago_in_words(created_at, include_seconds: true)} ago. \n<#{url}|Click Here> for details!"
     else
       if player_one_won?
         "Greetings #{player_two.first_and_last}, you have lost to #{player_one.first_and_last}.\nPlease confirm the match: <#{url}>"
