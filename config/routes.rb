@@ -23,7 +23,6 @@ Rails.application.routes.draw do
   get "/profile", to: "pages#profile"
   patch "/profile", to: "pages#update_profile"
   put "/profile", to: "pages#update_profile"
-  get "/stream", to: "pages#stream"
   get "/hall-of-fame", to: "pages#hall_of_fame"
   root to: 'pages#home'
 end

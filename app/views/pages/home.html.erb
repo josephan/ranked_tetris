@@ -56,14 +56,6 @@
   </div>
 
   <div class="six columns">
-    <h4>Slack & Twitch Chat</h4>
-    <iframe frameborder="1"
-            scrolling="yes"
-            id="ranked_fun"
-            src="https://www.twitch.tv/embed/ranked_fun/chat"
-            height="500">
-    </iframe>
-
     <h4>Last 10 Matches</h4>
 
     <%= render "matches/list", matches: @matches, extra_info_type: :elo_delta %>

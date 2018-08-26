@@ -9,9 +9,6 @@ class PagesController < ApplicationController
     @matches = Match.includes(:winner, :player_one, :player_two).confirmed.recent
   end
 
-  def stream
-  end
-
   def hall_of_fame
     @retired_users = User.where(retired: true).order(elo: :desc)
   end
